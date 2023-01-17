@@ -10,7 +10,7 @@ mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 mp_holistic = mp.solutions.holistic
 
-""" # For static images:
+# For static images:
 with mp_pose.Pose(
     static_image_mode=True,
     model_complexity=2,
@@ -22,11 +22,11 @@ with mp_pose.Pose(
     # Draw pose landmarks on the image.
     annotated_image = image.copy()
     mp_drawing.draw_landmarks(annotated_image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS)
-    cv2.imwrite(r'test.png', annotated_image) """
+    cv2.imwrite(r'test.png', annotated_image)
 
 # For webcam input:
 #cap = cv2.VideoCapture(0)
-cap = cv2.VideoCapture("/home/giacomo/Downloads/test1.avi")
+cap = cv2.VideoCapture("test1.avi")
 #For Video input:
 prevTime = 0
 with mp_pose.Pose(
