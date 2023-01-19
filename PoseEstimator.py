@@ -26,7 +26,17 @@ with mp_pose.Pose(
 
 # For webcam input:
 #cap = cv2.VideoCapture(0)
-cap = cv2.VideoCapture("/home/giacomo/Downloads/test1.avi")
+cap = cv2.VideoCapture("/home/giacomo/Downloads/FallDataset/Home_01/Videos/video (23).avi")
+
+# Get video file's dimensions
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+
+# Creates output video file
+codec = cv2.VideoWriter_fourcc(*'MJPG')
+writer = cv2.VideoWriter("/home/giacomo/Downloads/video23_pose.avi", codec, 30, (frame_width,frame_height))
+  
+
 #For Video input:
 prevTime = 0
 with mp_pose.Pose(
@@ -55,7 +65,12 @@ with mp_pose.Pose(
     fps = 1 / (currTime - prevTime)
     prevTime = currTime
     cv2.putText(image, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 196, 255), 2)
-    cv2.imshow('BlazePose', image)
+    #cv2.imshow('BlazePose', image) # Uncomment to show if running local
+
+    writer.write(image)
+
     if cv2.waitKey(5) & 0xFF == 27:
       break
+
 cap.release()
+writer.release()
